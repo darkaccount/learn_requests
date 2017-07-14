@@ -14,7 +14,7 @@ def better_print(json_str):
 
 
 def request_method():
-    response = requests.get(build_uri('users/darkaccount'))
+    response = requests.get(build_uri('user/emails'), auth=('imoocdemo', 'imoocdemo123'))
     print (better_print(response.text))
 
 if __name__ == '__main__':
