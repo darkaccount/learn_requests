@@ -24,8 +24,17 @@ def params_request():
     print (better_print(response.text))
     print (response.request.headers)
     print (response.url)
-   
+
+
+def json_request():
+    json = {'name': 'fathermooc2', 'eamil': 'helloaa@imooc.org'}
+    response = requests.patch(build_uri('user'), auth=('imoocdemo', 'imoocdemo123'), json=json)
+    print (better_print(response.text))
+    print (response.request.headers)
+    print (response.request.body)
+    print (response.status_code)
 
 if __name__ == '__main__':
 #    request_method()
-    params_request()
+#    params_request()
+    json_request()
