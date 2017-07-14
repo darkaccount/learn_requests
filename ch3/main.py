@@ -17,5 +17,15 @@ def request_method():
     response = requests.get(build_uri('user/emails'), auth=('imoocdemo', 'imoocdemo123'))
     print (better_print(response.text))
 
+
+def params_request():
+    params = {'since': 11}
+    response = requests.get(build_uri('users'), params=params)
+    print (better_print(response.text))
+    print (response.request.headers)
+    print (response.url)
+   
+
 if __name__ == '__main__':
-    request_method()
+#    request_method()
+    params_request()
