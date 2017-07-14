@@ -1,6 +1,7 @@
 # _*_ coding: utf-8 _*_
 import json
 import requests
+from requests import exceptions
 
 URL = 'https://api.github.com'
 
@@ -31,10 +32,28 @@ def json_request():
     response = requests.patch(build_uri('user'), auth=('imoocdemo', 'imoocdemo123'), json=json)
     print (better_print(response.text))
     print (response.request.headers)
-    print (response.request.body)
+    print (response.request.body.decode('utf-8'))
     print (response.status_code)
+
+
+def timeout_request():
+    try:
+        response = requests.get(build_uri('user/emails'), timeout=0.6)
+        response.raise_for_status()
+    except exceptions.Timeout as e:
+        print ('>>>>TimeoutError:')
+        print (e)
+    except exceptions.HTTPError as e:
+        print ('>>>>HTTPError:')
+        print (e)
+    else:
+        print ('>>>>Normal:')
+        print (response.text)
+        print (response.status_code)
+
 
 if __name__ == '__main__':
 #    request_method()
 #    params_request()
-    json_request()
+#    json_request()
+    timeout_request()
